@@ -68,19 +68,74 @@ class DcaFilesListener
                 ],
                 'sql' => "varchar(255) NOT NULL default ''"
             ],
+            'ic_imageID' =>
+            [
+                'exclude'   => true,
+                'inputType' => 'text',
+                'eval'      =>
+                [
+                    'maxlength' => 255,
+                    'tl_class' => 'w50'
+                ],
+                'sql' => "varchar(255) NOT NULL default ''"
+            ],
+            'ic_websiteName' =>
+            [
+                'exclude'   => true,
+                'inputType' => 'text',
+                'eval'      =>
+                [
+                    'maxlength' => 255,
+                    'tl_class' => 'w50'
+                ],
+                'sql' => "varchar(255) NOT NULL default ''"
+            ],
+            'ic_date' =>
+            [
+                'exclude'   => true,
+                'inputType' => 'text',
+                'eval'      =>
+                [
+                    'datepicker' => true,
+                    'tl_class' => 'w50'
+                ],
+                'sql' => "varchar(255) NOT NULL default ''"
+            ],
+            'ic_buyersName' =>
+            [
+                'exclude'   => true,
+                'inputType' => 'text',
+                'eval'      =>
+                [
+                    'maxlength' => 255,
+                    'tl_class' => 'w50'
+                ],
+                'sql' => "varchar(255) NOT NULL default ''"
+            ],
+            'ic_pages' =>
+            [
+                'inputType'               => 'pageTree',
+                'foreignKey'              => 'tl_page.title',
+                'eval'                    => array('multiple'=>true, 'fieldType'=>'checkbox', 'isSortable'=>true, 'tl_class' => 'w50'),
+                'sql'                     => "blob NULL",
+                'relation'                => array('type'=>'hasMany', 'load'=>'lazy')
+            ],
             'ic_hide' =>
             [
                 'exclude'   => true,
                 'inputType' => 'checkbox',
                 'eval'      =>
                 [
-                    'tl_class' => 'clear m12 w50'
+                    'tl_class' => 'clear cbx m12 w50'
                 ],
                 'sql'       => "char(1) NOT NULL default ''"
             ],
 
         ]);
     }
+
+
+
 
 
     /**
@@ -117,7 +172,7 @@ class DcaFilesListener
     {
         PaletteManipulator::create()
             ->addLegend('tastaturberuf_image_copyright_legend', 'meta')
-            ->addField(['ic_copyright', 'ic_href', 'ic_hide'], 'tastaturberuf_image_copyright_legend')
+            ->addField(['ic_copyright', 'ic_href','ic_imageID','ic_websiteName','ic_date','ic_buyersName','ic_pages','ic_hide'], 'tastaturberuf_image_copyright_legend')
             ->applyToPalette('default', $table)
         ;
     }

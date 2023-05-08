@@ -1,24 +1,46 @@
+<?php
+
+use Contao\StringUtil;
+
+$arrayFiles = [] ;
+
+foreach($this->files as $file):
+    $arrayFiles[$file->ic_websiteName][] = $file ;
+endforeach;
+
+$GLOBALS['TL_CSS'][] = 'bundles/tastaturberufcontaoimagecopyright/css/mod_image_copyright_list.scss|static';
+
+?>
+
 <?php $this->extend('block_unsearchable') ?>
 
 <?php $this->block('content') ?>
 
-<?php if ( $this->files ): ?>
+<?php if ($arrayFiles) : ?>
     <div style="display: flex; align-items: baseline; align-content: space-between; justify-content: left; flex-wrap: wrap">
-    <?php foreach ($this->files as $file ): ?>
-        <div style="margin-right: 1em;">
-            <img class="copyright-image" src="<?=$file->src?>" alt="<?=$file->ic_copyright?>">
-            <p class="copyright-text">
-                <?php if ($file->ic_href === '' ): ?>
-                    <?=$file->ic_copyright?>
-                <?php else: ?>
-                    <a href="<?=$file->ic_href?>"><?=$file->ic_copyright?></a>
-                <?php endif ?>
-            </p>
-        </div>
-    <?php endforeach ?>
+        <?php foreach ($arrayFiles as $key => $files) : ?>
+            <?php if($key == ""): $key = "/"; endif; ?>
+            <p><?= $key ?></p>
+            <?php foreach($files as $file): ?>
+            <?php $file->ic_pages = StringUtil::deserialize($file->ic_pages); ?>
+            <div style="margin-right: 1em;">
+                <img class="copyright-image" src="<?= $file->src ?>" alt="<?= $file->ic_copyright ?>">
+                <p class="copyright-text">
+                    <?= $file->ic_imageID ?> <br>
+                    <?php if ($file->ic_href !== '') : ?>
+                    <a href="https://<?= $file->ic_href ?>"><?= $file->ic_copyright ?></a> <br>
+                    <?php endif ?>
+                </p>
+                <p class="copyright-text-additional"> <?php // Here comes accordion or some modal ?>
+                    <?php if($file->ic_date): ?>Image date of purchase : <?= $file->ic_date ?> <br> <?php endif; ?>
+                    <?php if($file->ic_buyersName): ?>Buyers Name : <?= $file->ic_buyersName ?> <br><?php endif; ?>
+                    Pages where image is used : <br>
+                    <?php if($file->ic_pages): foreach($file->ic_pages as $pages): ?> {{link::<?= $pages ?>}} <br> <?php endforeach;endif; ?>
+                </p>
+            </div>
+            <?php endforeach; ?>
+        <?php endforeach; ?>
     </div>
-<?php else: ?>
-    <p>{{label::image_copyright_list:ic_no_files_found}}</p>
-<?php endif ?>
+<?php endif; ?>
 
 <?php $this->endblock() ?>
