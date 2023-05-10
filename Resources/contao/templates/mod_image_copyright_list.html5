@@ -9,6 +9,7 @@ foreach($this->files as $file):
 endforeach;
 
 $GLOBALS['TL_CSS'][] = 'bundles/tastaturberufcontaoimagecopyright/css/mod_image_copyright_list.scss|static';
+$GLOBALS['TL_JAVASCRIPT'][] = "bundles/tastaturberufcontaoimagecopyright/js/copyright-accordion.js|static";
 
 ?>
 
@@ -17,27 +18,51 @@ $GLOBALS['TL_CSS'][] = 'bundles/tastaturberufcontaoimagecopyright/css/mod_image_
 <?php $this->block('content') ?>
 
 <?php if ($arrayFiles) : ?>
-    <div style="display: flex; align-items: baseline; align-content: space-between; justify-content: left; flex-wrap: wrap">
+    <div class="inside">
         <?php foreach ($arrayFiles as $key => $files) : ?>
             <?php if($key == ""): $key = "/"; endif; ?>
-            <p><?= $key ?></p>
-            <?php foreach($files as $file): ?>
-            <?php $file->ic_pages = StringUtil::deserialize($file->ic_pages); ?>
-            <div style="margin-right: 1em;">
-                <img class="copyright-image" src="<?= $file->src ?>" alt="<?= $file->ic_copyright ?>">
-                <p class="copyright-text">
-                    <?= $file->ic_imageID ?> <br>
-                    <?php if ($file->ic_href !== '') : ?>
-                    <a href="https://<?= $file->ic_href ?>"><?= $file->ic_copyright ?></a> <br>
-                    <?php endif ?>
-                </p>
-                <p class="copyright-text-additional"> <?php // Here comes accordion or some modal ?>
-                    <?php if($file->ic_date): ?>Image date of purchase : <?= $file->ic_date ?> <br> <?php endif; ?>
-                    <?php if($file->ic_buyersName): ?>Buyers Name : <?= $file->ic_buyersName ?> <br><?php endif; ?>
-                    Pages where image is used : <br>
-                    <?php if($file->ic_pages): foreach($file->ic_pages as $pages): ?> {{link::<?= $pages ?>}} <br> <?php endforeach;endif; ?>
-                </p>
-            </div>
+                <h3 class="section-headline"><?= $key ?></h3>
+                <?php $counterForFiles = 0 ; ?>
+                <?php foreach($files as $file): ?>
+                    <?php $counterForFiles++ ?>
+                <?php $file->ic_pages = StringUtil::deserialize($file->ic_pages); ?>
+                <?php if(count($files) == $counterForFiles):?>
+                <div class="accordion last">
+                <?php else: ?>
+                <div class="accordion">
+                <?php endif; ?>
+                    <div class="accordion-header">
+                        <img class="copyright-image" src="<?= $file->src ?>" alt="<?= $file->ic_copyright ?>">
+                        <h3 class="copyright-text">
+                            <?= $file->ic_imageID ?> - 
+                            <?php if ($file->ic_href !== '') : ?>
+                                <a href="https://<?= $file->ic_href ?>"><?= $file->ic_copyright ?></a>
+                            <?php else: ?>
+                                <a><?= $file->ic_copyright ?></a>
+                            <?php endif; ?>
+                        </h3>
+                        <span class="icon"></span>
+                    </div>
+                    <div class="accordion-content">
+                        <div class="inside">
+                        <?php if($file->ic_date): ?><p>Image date of purchase : <?= $file->ic_date ?></p><?php endif; ?>
+                            <?php if($file->ic_buyersName): ?><p>Buyers Name : <?= $file->ic_buyersName ?></p><?php endif; ?>
+                            <p>Pages where image is used : 
+                            <?php 
+                            if($file->ic_pages) :
+                            $count = count($file->ic_pages);
+                            endif;
+                            $counter = 0 ;
+                            ?>
+                            <?php if($file->ic_pages): 
+                                foreach($file->ic_pages as $pages): ?> 
+                                <?php $counter++ ;?>
+                                {{link::<?= $pages ?>}}<?php if($counter !== $count): echo ","; endif; ?>
+                            <?php endforeach;endif; ?>    
+                            </p>
+                        </div>
+                    </div>
+                </div>
             <?php endforeach; ?>
         <?php endforeach; ?>
     </div>
