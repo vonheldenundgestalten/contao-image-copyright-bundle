@@ -16,3 +16,4 @@ namespace Tastaturberuf\ContaoImageCopyrightBundle\Contao\Translation;
 
 $GLOBALS['TL_LANG']['tl_module']['ic_folder'] = ['Restrict image selection to folder', 'Restricts the image selection to the selected folder and all subfolders.'];
 $GLOBALS['TL_LANG']['tl_module']['ic_order']  = ['Sorting', 'Adjust sorting by selecting and dragging.'];
+$GLOBALS['TL_LANG']['tl_module']['ic_show_information']  = ['Show extended info', 'Show additional info'];

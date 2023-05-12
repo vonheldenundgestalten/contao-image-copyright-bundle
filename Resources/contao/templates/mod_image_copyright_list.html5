@@ -11,6 +11,11 @@ endforeach;
 $GLOBALS['TL_CSS'][] = 'bundles/tastaturberufcontaoimagecopyright/css/mod_image_copyright_list.scss|static';
 $GLOBALS['TL_JAVASCRIPT'][] = "bundles/tastaturberufcontaoimagecopyright/js/copyright-accordion.js|static";
 
+if($this->ic_show_information){
+    $showInfo = true ;
+}
+
+
 ?>
 
 <?php $this->extend('block_unsearchable') ?>
@@ -31,7 +36,7 @@ $GLOBALS['TL_JAVASCRIPT'][] = "bundles/tastaturberufcontaoimagecopyright/js/copy
                 <?php else: ?>
                 <div class="accordion">
                 <?php endif; ?>
-                    <div class="accordion-header">
+                    <div class="accordion-header <?php if(!$showInfo): echo 'disabled'; endif ?> ">
                         <img class="copyright-image" src="<?= $file->src ?>" alt="<?= $file->ic_copyright ?>">
                         <h3 class="copyright-text">
                             <?= $file->ic_imageID ?> - 
@@ -41,8 +46,9 @@ $GLOBALS['TL_JAVASCRIPT'][] = "bundles/tastaturberufcontaoimagecopyright/js/copy
                                 <a><?= $file->ic_copyright ?></a>
                             <?php endif; ?>
                         </h3>
-                        <span class="icon"></span>
+                        <?php if($showInfo): ?> <span class="icon"></span> <?php endif; ?>
                     </div>
+                    <?php if($showInfo): ?>
                     <div class="accordion-content">
                         <div class="inside">
                         <?php if($file->ic_date): ?><p>Image date of purchase : <?= $file->ic_date ?></p><?php endif; ?>
@@ -62,6 +68,7 @@ $GLOBALS['TL_JAVASCRIPT'][] = "bundles/tastaturberufcontaoimagecopyright/js/copy
                             </p>
                         </div>
                     </div>
+                    <?php endif; ?>
                 </div>
             <?php endforeach; ?>
         <?php endforeach; ?>

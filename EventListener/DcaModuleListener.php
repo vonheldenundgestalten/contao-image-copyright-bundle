@@ -46,7 +46,7 @@ class DcaModuleListener
         $GLOBALS['TL_DCA'][$table]['palettes'][ImageCopyrightListController::TYPE] =
         '
             {title_legend},name,headline,type;
-            {config_legend},imgSize,ic_folder,ic_order;
+            {config_legend},imgSize,ic_folder,ic_order,ic_show_information;
             {template_legend:hide},customTpl;
             {protected_legend:hide},protected;
             {expert_legend:hide},guests,cssID
@@ -74,6 +74,14 @@ class DcaModuleListener
                 'tl_class' => 'clr'
             ],
             'sql' => 'text NULL'
+        ];
+
+        $GLOBALS['TL_DCA'][$table]['fields']['ic_show_information'] =
+        [
+			'exclude'                 => true,
+			'inputType'               => 'checkbox',
+			'eval'                    => array('submitOnChange'=>true),
+			'sql'                     => "char(1) COLLATE ascii_bin NOT NULL default ''"
         ];
 
     }
