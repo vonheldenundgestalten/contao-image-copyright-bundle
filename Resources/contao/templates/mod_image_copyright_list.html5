@@ -5,6 +5,7 @@ use Contao\StringUtil;
 $arrayFiles = [] ;
 
 foreach($this->files as $file):
+    $file->ic_websiteName = strtoupper($file->ic_websiteName);
     $arrayFiles[$file->ic_websiteName][] = $file ;
 endforeach;
 
@@ -26,6 +27,7 @@ if($this->ic_show_information){
     <div class="inside">
         <?php foreach ($arrayFiles as $key => $files) : ?>
             <?php if($key == ""): $key = "/"; endif; ?>
+                <?php $key = strtolower($key); $key = ucfirst($key); ?>
                 <h3 class="section-headline"><?= $key ?></h3>
                 <?php $counterForFiles = 0 ; ?>
                 <?php foreach($files as $file): ?>
