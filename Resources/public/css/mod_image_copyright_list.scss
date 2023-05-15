@@ -84,6 +84,10 @@
 
     }
 
+    .accordion-header.disabled {
+        cursor: auto;
+    }
+
     .accordion.last .accordion-header {
         margin-bottom: 0;
     }
