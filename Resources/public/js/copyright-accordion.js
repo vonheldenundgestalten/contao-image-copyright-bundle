@@ -5,6 +5,8 @@ function initAccordion() {
 
     accordionHeaders.forEach(function(header) {
         header.addEventListener('click', function(event) {
+            if (header.classList.contains('disabled')) return;
+            
             const accordionContent = header.nextElementSibling;
 
             if (previousHeader !== null && previousHeader !== header) {
@@ -24,7 +26,7 @@ function initAccordion() {
             window.addEventListener('resize', function() {
                 accordionContent.style.maxHeight = `${accordionContent.scrollHeight}px`;
             });
-            
+
             previousHeader = header;
             previousContent = accordionContent;
         });
@@ -48,13 +50,3 @@ if (document.readyState === 'loading') {
         initAccordion();
     })();
 }
-
-const observer = new MutationObserver(mutations => {
-
-    for (const mutation of mutations) {
-        if (mutation.type === 'attributes' && mutation.attributeName === 'style') {
-            const newHeight = myDiv.clientHeight;
-            console.log(`The div's height is now ${newHeight}px`);
-        }
-    }
-});
