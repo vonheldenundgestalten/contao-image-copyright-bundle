@@ -16,7 +16,6 @@ if($this->ic_show_information){
     $showInfo = true ;
 }
 
-
 ?>
 
 <?php $this->extend('block_unsearchable') ?>
@@ -27,11 +26,12 @@ if($this->ic_show_information){
     <div class="inside">
         <?php foreach ($arrayFiles as $key => $files) : ?>
             <?php if($key == ""): $key = "/"; endif; ?>
-                <?php $key = strtolower($key); $key = ucfirst($key); ?>
+                <?php if($key = "ISTOCK"){$key = "iStock" ;}else{$key = strtolower($key); $key = ucfirst($key);} ?>
                 <h3 class="section-headline"><?= $key ?></h3>
                 <?php $counterForFiles = 0 ; ?>
                 <?php foreach($files as $file): ?>
-                    <?php $counterForFiles++ ?>
+                <?php $counterForFiles++ ?>
+                <?php $file->ic_href = preg_replace("(^https?://)", "", $file->ic_href ); // If accidently somebody put full url and not just domain ?>
                 <?php $file->ic_pages = StringUtil::deserialize($file->ic_pages); ?>
                 <?php if(count($files) == $counterForFiles):?>
                 <div class="accordion last">
