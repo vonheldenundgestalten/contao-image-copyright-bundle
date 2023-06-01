@@ -19,9 +19,11 @@ use Contao\ManagerPlugin\Bundle\BundlePluginInterface;
 use Contao\ManagerPlugin\Bundle\Config\BundleConfig;
 use Contao\ManagerPlugin\Bundle\Parser\ParserInterface;
 use Tastaturberuf\ContaoImageCopyrightBundle\TastaturberufContaoImageCopyrightBundle;
+use Symfony\Component\Config\Loader\LoaderInterface;
+use Contao\ManagerPlugin\Config\ConfigPluginInterface;
 
 
-class Plugin implements BundlePluginInterface
+class Plugin implements BundlePluginInterface, ConfigPluginInterface
 {
 
     /**
@@ -33,6 +35,11 @@ class Plugin implements BundlePluginInterface
             BundleConfig::create(TastaturberufContaoImageCopyrightBundle::class)
                 ->setLoadAfter([ContaoCoreBundle::class])
         ];
+    }
+
+    public function registerContainerConfiguration(LoaderInterface $loader, array $config)
+    {
+        $loader->load('@TastaturberufContaoImageCopyrightBundle/Resources/config/config.yaml');
     }
 
 }

@@ -1,0 +1,9 @@
+contao:
+    image:
+        sizes:
+            licensceimage:
+                lazy_loading: true
+                formats:
+                    jpg: [webp, jpg]
+                    webp: [webp, jpg]
+                    png: [webp, png]

@@ -39,7 +39,7 @@ if($this->ic_show_information){
                 <div class="accordion">
                 <?php endif; ?>
                     <div class="accordion-header <?php if(!$showInfo): echo 'disabled'; endif ?> ">
-                        <img class="copyright-image" src="<?= $file->src ?>" alt="<?= $file->ic_copyright ?>">
+                        {{picture::<?= $file->src ?>?size=_licensceimage}}
                         <h3 class="copyright-text">
                             <?= $file->ic_imageID ?> - 
                             <?php if ($file->ic_href !== '') : ?>
