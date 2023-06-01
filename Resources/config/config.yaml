@@ -2,6 +2,9 @@ contao:
     image:
         sizes:
             licensceimage:
+                width: 100
+                height: 80
+                resize_mode: box
                 lazy_loading: true
                 formats:
                     jpg: [webp, jpg]
