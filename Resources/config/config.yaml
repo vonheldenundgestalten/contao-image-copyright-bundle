@@ -6,3 +6,7 @@ contao:
                 height: 80
                 resize_mode: box
                 lazy_loading: true
+                formats:
+                    jpg: [webp, jpg]
+                    webp: [webp, jpg]
+                    png: [webp, png]
