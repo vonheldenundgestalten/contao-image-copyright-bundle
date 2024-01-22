@@ -45,7 +45,7 @@ if($this->ic_show_information){
                             <?php if ($file->ic_href !== '') : ?>
                                 <a href="https://<?= $file->ic_href ?>"><?= $file->ic_copyright ?></a>
                             <?php else: ?>
-                                <a><?= $file->ic_copyright ?></a>
+                                <span><?= $file->ic_copyright ?></span>
                             <?php endif; ?>
                         </h3>
                         <?php if($showInfo): ?> <span class="icon"></span> <?php endif; ?>
