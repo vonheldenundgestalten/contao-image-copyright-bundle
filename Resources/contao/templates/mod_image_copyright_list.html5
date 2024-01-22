@@ -43,7 +43,7 @@ if($this->ic_show_information){
                         <h3 class="copyright-text">
                             <?= $file->ic_imageID ?> - 
                             <?php if ($file->ic_href !== '') : ?>
-                                <a href="https://<?= $file->ic_href ?>"><?= $file->ic_copyright ?></a>
+                                <a href="https://<?= $file->ic_href ?>" target="_blank"><?= $file->ic_copyright ?></a>
                             <?php else: ?>
                                 <span><?= $file->ic_copyright ?></span>
                             <?php endif; ?>
