@@ -26,7 +26,6 @@ if($this->ic_show_information){
     <div class="inside">
         <?php foreach ($arrayFiles as $key => $files) : ?>
             <?php if($key == ""): $key = "/"; endif; ?>
-                <?php if($key == "ISTOCK"){$key = "iStock" ;}else{$key = strtolower($key); $key = ucwords($key);} ?>
                 <h3 class="section-headline"><?= $key ?></h3>
                 <?php $counterForFiles = 0 ; ?>
                 <?php foreach($files as $file): ?>
