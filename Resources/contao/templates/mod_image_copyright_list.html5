@@ -5,7 +5,6 @@ use Contao\StringUtil;
 $arrayFiles = [] ;
 
 foreach($this->files as $file):
-    $file->ic_websiteName = strtoupper($file->ic_websiteName);
     $arrayFiles[$file->ic_websiteName][] = $file ;
 endforeach;
 
