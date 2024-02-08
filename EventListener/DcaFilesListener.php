@@ -182,7 +182,7 @@ class DcaFilesListener
     {
         PaletteManipulator::create()
             ->addLegend('tastaturberuf_image_copyright_legend', 'meta')
-            ->addField(['ic_copyright', 'ic_href','ic_imageID','ic_websiteName','ic_date','ic_buyersName','ic_pages','ic_hide'], 'tastaturberuf_image_copyright_legend')
+            ->addField(['ic_copyright', 'ic_href','ic_imageID','ic_websiteName','ic_date','ic_buyersName','ic_pages','ic_hide','ic_licensehide'], 'tastaturberuf_image_copyright_legend')
             ->applyToPalette('default', $table)
         ;
     }
