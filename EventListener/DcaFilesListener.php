@@ -138,7 +138,7 @@ class DcaFilesListener
                 [
                     'tl_class' => 'clear cbx m12 w50'
                 ],
-                'sql'       => "char(1) NOT NULL default ''"
+                'sql'       => "char(1) NOT NULL default '1'"
             ],
 
         ]);
