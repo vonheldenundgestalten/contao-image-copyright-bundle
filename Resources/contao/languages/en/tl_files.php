@@ -25,5 +25,6 @@ $GLOBALS['TL_LANG']['tl_files'] = array_replace_recursive($GLOBALS['TL_LANG']['t
     'ic_websiteName'      => ['Name of photo website', 'Website where photo is bought'],
     'ic_date'      => ['Date', 'Date when photo is bought'],
     'ic_buyersName'      => ['Buyers Name', 'Name of buyer/company who bought photo'],
-    'ic_pages'      => ['Page Picker', 'Pick pages where image is included']
+    'ic_pages'      => ['Page Picker', 'Pick pages where image is included'],
+    'ic_licensehide' => ['Hide license information below image','Hides license information below image']
 ]);

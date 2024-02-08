@@ -130,6 +130,16 @@ class DcaFilesListener
                 ],
                 'sql'       => "char(1) NOT NULL default ''"
             ],
+            'ic_licensehide' =>
+            [
+                'exclude'   => true,
+                'inputType' => 'checkbox',
+                'eval'      =>
+                [
+                    'tl_class' => 'clear cbx m12 w50'
+                ],
+                'sql'       => "char(1) NOT NULL default ''"
+            ],
 
         ]);
     }
