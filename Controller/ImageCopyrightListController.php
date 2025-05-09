@@ -50,26 +50,23 @@ class ImageCopyrightListController extends AbstractFrontendModuleController
     }
 
 
-    protected function getResponse(Template $template, ModuleModel $model, Request $request): Response
+    protected function getResponse(\Contao\CoreBundle\Twig\FragmentTemplate $template, ModuleModel $model, Request $request): Response
     {
-        if ( null !== $files = $this->getImages($model) )
-        {
+        if (null !== $files = $this->getImages($model)) {
             $imgSize = StringUtil::deserialize($model->imgSize);
-
-            foreach ($files as $file)
-            {
-                $image = $this->imageFactory->create($this->rootDir.DIRECTORY_SEPARATOR.$file->path, $imgSize);
-
+    
+            foreach ($files as $file) {
+                $image = $this->imageFactory->create($this->rootDir . DIRECTORY_SEPARATOR . $file->path, $imgSize);
+    
                 $file->src = $image->getUrl($this->rootDir);
                 $file->dimensions = $image->getDimensions();
             }
-
+    
             $template->files = $files;
         }
-
+    
         return $template->getResponse();
     }
-
 
     private function getImages(ModuleModel $model): ?Collection
     {
